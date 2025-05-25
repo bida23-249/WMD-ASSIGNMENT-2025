@@ -1,0 +1,245 @@
+<style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff5f5;
+      color: #4b1d24;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      color: #540b0e;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Navigation */
+    nav {
+      background: #5c1a1f;
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(92,26,31,0.8);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      width: 100%;
+      max-width: 600px;
+      justify-content: space-around;
+    }
+    nav li {
+      flex: 1;
+      text-align: center;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: #f0d4d4;
+      font-size: 1rem;
+      padding: 12px 0;
+      width: 100%;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    nav button:hover, nav button.active {
+      background-color: #7a2b33;
+      color: #fff5f5;
+    }
+  
+    /* Container for pages */
+    .page {
+      display: none;
+      padding: 16px 16px 80px 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      min-height: calc(100vh - 56px);
+    }
+    .page.active {
+      display: block;
+    }
+  
+    /* Home Page */
+    #home h1 {
+      font-size: 2rem;
+      color: #7a2b33;
+    }
+    #home p {
+      font-size: 1.1rem;
+      line-height: 1.4;
+      margin-top: 0.6rem;
+    }
+  
+    /* Menu Page */
+    #menu h2 {
+      color: #5c1a1f;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #7a2b33;
+      padding-bottom: 4px;
+    }
+    .menu-item {
+      background: #f9e8e8;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 4px rgba(92, 26, 31, 0.15);
+    }
+    .menu-item h3 {
+      margin: 0 0 6px 0;
+      color: #7a2b33;
+    }
+    .menu-item p {
+      margin: 0 0 4px 0;
+      font-size: 0.95rem;
+      color: #542022;
+    }
+    .menu-item span.price {
+      font-weight: 700;
+      color: #5c1a1f;
+    }
+  
+    /* Order Page */
+    #order h2 {
+      color: #5c1a1f;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #7a2b33;
+      padding-bottom: 4px;
+    }
+    form {
+      background: #f9e8e8;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(92, 26, 31, 0.25);
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 600;
+      color: #6b232b;
+    }
+    select, input[type="number"], input[type="text"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border: 1.5px solid #a04a52;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .food-item-select {
+      margin-top: 8px;
+    }
+    button.submit-btn {
+      margin-top: 20px;
+      background-color: #7a2b33;
+      border: none;
+      color: #fff5f5;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(122,43,51,0.6);
+      transition: background-color 0.3s ease;
+    }
+    button.submit-btn:hover {
+      background-color: #54171b;
+    }
+  
+    /* Order summary */
+    #order-summary {
+      margin-top: 20px;
+      background: #f0d4d4;
+      padding: 16px;
+      border-radius: 12px;
+      color: #54171b;
+      font-weight: 600;
+    }
+  
+    /* About Page */
+    #about h2 {
+      color: #5c1a1f;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #7a2b33;
+      padding-bottom: 4px;
+    }
+    #about p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #4b1d24;
+    }
+  
+    /* Contact Page */
+    #contact h2 {
+      color: #5c1a1f;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #7a2b33;
+      padding-bottom: 4px;
+    }
+    #contact form {
+      background: #f9e8e8;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(92, 26, 31, 0.25);
+    }
+    #contact label {
+      font-weight: 600;
+      color: #6b232b;
+    }
+    #contact input, #contact textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border: 1.5px solid #a04a52;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    #contact textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    #contact button {
+      margin-top: 20px;
+      background-color: #7a2b33;
+      border: none;
+      color: #fff5f5;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(122,43,51,0.6);
+      transition: background-color 0.3s ease;
+    }
+    #contact button:hover {
+      background-color: #54171b;
+    }
+  
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav ul {
+        max-width: 100%;
+      }
+      .page {
+        padding: 12px 12px 72px 12px;
+      }
+    }
+  </style>

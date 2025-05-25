@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Trad Bites - Botswana Traditional Food</title>
+</head>
+<body>
+<nav aria-label="Primary">
+  <ul role="menubar">
+    <li role="none"><button role="menuitem" class="nav-btn active" data-target="home" aria-current="page">Home</button></li>
+    <li role="none"><button role="menuitem" class="nav-btn" data-target="menu">Menu</button></li>
+    <li role="none"><button role="menuitem" class="nav-btn" data-target="order">Order</button></li>
+    <li role="none"><button role="menuitem" class="nav-btn" data-target="about">About Us</button></li>
+    <li role="none"><button role="menuitem" class="nav-btn" data-target="contact">Contact</button></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="home" class="page active" tabindex="0" aria-label="Home page">
+    <h1>Welcome to Trad Bites</h1>
+    <p>Experience the authentic flavors of Botswana through our delicious traditional food offerings. At Trad Bites, we take pride in serving recipes passed down through generations, made with fresh local ingredients and lots of love.</p>
+    <p>Order online or visit us to enjoy the rich culinary heritage of Botswana right at your fingertips.</p>
+  </section>
+
+  <section id="menu" class="page" tabindex="0" aria-label="Menu page">
+    <h2>Our Menu</h2>
+    <div class="menu-item">
+      <h3>Seswaa</h3>
+      <p>Slow-cooked tender beef shredded and served with pap or samp.</p>
+      <span class="price">P50</span>
+    </div>
+    <div class="menu-item">
+      <h3>Vetkoek</h3>
+      <p>Deep-fried dough balls filled with savory mince or served plain with syrup.</p>
+      <span class="price">P20</span>
+    </div>
+    <div class="menu-item">
+      <h3>Morogo</h3>
+      <p>Traditional spinach dish cooked with onions, tomatoes, and peanut butter.</p>
+      <span class="price">P35</span>
+    </div>
+    <div class="menu-item">
+      <h3>Pap and Chakalaka</h3>
+      <p>Corn porridge served with spicy vegetable relish.</p>
+      <span class="price">P30</span>
+    </div>
+    <div class="menu-item">
+      <h3>Beso</h3>
+      <p>A tasty sorghum porridge often enjoyed with milk or stew.</p>
+      <span class="price">P25</span>
+    </div>
+  </section>
+
+  <section id="order" class="page" tabindex="0" aria-label="Order page">
+    <h2>Place Your Order</h2>
+    <form id="order-form" aria-live="polite" novalidate>
+      <label for="food-select">Choose Food Item</label>
+      <select id="food-select" required aria-required="true" aria-describedby="food-help">
+        <option value="" disabled selected>-- Select a dish --</option>
+        <option value="Seswaa" data-price="50">Seswaa - P50</option>
+        <option value="Vetkoek" data-price="20">Vetkoek - P20</option>
+        <option value="Morogo" data-price="35">Morogo - P35</option>
+        <option value="Pap and Chakalaka" data-price="30">Pap and Chakalaka - P30</option>
+        <option value="Beso" data-price="25">Beso - P25</option>
+      </select>
+      <small id="food-help">Select the traditional dish you want to order.</small>
+
+      <label for="quantity-input">Quantity</label>
+      <input type="number" id="quantity-input" min="1" max="20" value="1" required aria-required="true"/>
+
+      <label for="delivery-select">Delivery Option</label>
+      <select id="delivery-select" required aria-required="true">
+        <option value="" disabled selected>-- Select delivery option --</option>
+        <option value="pickup">Pickup (Free)</option>
+        <option value="home-delivery">Home Delivery (+P20)</option>
+      </select>
+
+      <div id="delivery-details" style="display:none;">
+        <label for="address-input">Delivery Address</label>
+        <textarea id="address-input" rows="3" placeholder="Enter your delivery address"></textarea>
+
+        <label for="phone-input">Phone Number</label>
+        <input type="tel" id="phone-input" pattern="\\+?\\d{7,15}" placeholder="+267 7XX XXX XXX" />
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Order</button>
+    </form>
+    <div id="order-summary" role="alert" aria-live="assertive" style="display:none;"></div>
+  </section>
+
+  <section id="about" class="page" tabindex="0" aria-label="About Us page">
+    <h2>About Trad Bites</h2>
+    <p>Trad Bites was founded to celebrate the rich culinary heritage of Botswana. Our mission is to bring authentic traditional foods to your table with convenience and care.</p>
+    <p>Our ingredients are locally sourced, and we prepare every dish following authentic recipes that preserve the cultural essence of Botswana cuisine. Whether you're craving Seswaa or Morogo, we've got you covered.</p>
+  </section>
+
+  <section id="contact" class="page" tabindex="0" aria-label="Contact page">
+    <h2>Contact Us</h2>
+    <form id="contact-form" aria-live="polite" novalidate>
+      <label for="name-input">Name</label>
+      <input type="text" id="name-input" required aria-required="true" placeholder="Your Name" />
+
+      <label for="email-input">Email</label>
+      <input type="email" id="email-input" required aria-required="true" placeholder="you@example.com" />
+
+      <label for="message-textarea">Message</label>
+      <textarea id="message-textarea" rows="4" required aria-required="true" placeholder="Write your message here"></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+    <div id="contact-feedback" role="alert" aria-live="assertive" style="display:none; margin-top:12px; color:#7a2b33; font-weight:600;"></div>
+  </section>
+</main>
+
+<script>
+  // Navigation logic
+  const navButtons = document.querySelectorAll('nav button.nav-btn');
+  const pages = document.querySelectorAll('section.page');
+
+  function setActivePage(pageId) {
+    pages.forEach(page => {
+      page.classList.toggle('active', page.id === pageId);
+      if (page.id === pageId) {
+        page.setAttribute('tabindex', '0');
+        page.focus();
+      } else {
+        page.setAttribute('tabindex', '-1');
+      }
+    });
+    navButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.target === pageId);
+      btn.setAttribute('aria-current', btn.dataset.target === pageId ? 'page' : 'false');
+    });
+    // Reset order summary on navigation to order page
+    if (pageId === "order") {
+      document.getElementById('order-summary').style.display = 'none';
+      document.getElementById('order-form').reset();
+      document.getElementById('delivery-details').style.display = 'none';
+    }
+    // Reset contact feedback on navigation to contact page
+    if (pageId === "contact") {
+      document.getElementById('contact-feedback').style.display = 'none';
+      document.getElementById('contact-form').reset();
+    }
+  }
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => setActivePage(btn.dataset.target));
+  });
+
+  // Order form delivery option toggle
+  const deliverySelect = document.getElementById('delivery-select');
+  const deliveryDetails = document.getElementById('delivery-details');
+
+  deliverySelect.addEventListener('change', () => {
+    if (deliverySelect.value === 'home-delivery') {
+      deliveryDetails.style.display = 'block';
+      document.getElementById('address-input').setAttribute('required', 'true');
+      document.getElementById('phone-input').setAttribute('required', 'true');
+    } else {
+      deliveryDetails.style.display = 'none';
+      document.getElementById('address-input').removeAttribute('required');
+      document.getElementById('phone-input').removeAttribute('required');
+      document.getElementById('address-input').value = '';
+      document.getElementById('phone-input').value = '';
+    }
+  });
+
+  // Order form submission handling
+  document.getElementById('order-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const foodSelect = document.getElementById('food-select');
+    const quantityInput = document.getElementById('quantity-input');
+    const deliveryOption = document.getElementById('delivery-select');
+    const addressInput = document.getElementById('address-input');
+    const phoneInput = document.getElementById('phone-input');
+    const orderSummary = document.getElementById('order-summary');
+
+    // Validate food chosen
+    if (!foodSelect.value) {
+      alert('Please select a food item.');
+      return;
+    }
+
+    // Validate quantity
+    const quantity = parseInt(quantityInput.value, 10);
+    if (isNaN(quantity) || quantity < 1 || quantity > 20) {
+      alert('Please enter a quantity between 1 and 20.');
+      return;
+    }
+
+    // Validate delivery option chosen
+    if (!deliveryOption.value) {
+      alert('Please select a delivery option.');
+      return;
+    }
+
+    // For home delivery validate address and phone
+    if (deliveryOption.value === 'home-delivery') {
+      if (!addressInput.value.trim()) {
+        alert('Please enter your delivery address.');
+        return;
+      }
+      if (!phoneInput.value.trim()) {
+        alert('Please enter your phone number.');
+        return;
+      }
+      // Basic phone number pattern check
+      const phonePattern = /^\+?\d{7,15}$/;
+      const phoneClean = phoneInput.value.replace(/\s+/g, '');
+      if (!phonePattern.test(phoneClean)) {
+        alert('Please enter a valid phone number with 7 to 15 digits, optionally starting with +. Example: +26771234567');
+        return;
+      }
+    }
+
+    // Calculate total cost
+    const price = Number(foodSelect.options[foodSelect.selectedIndex].dataset.price);
+    const deliveryCost = deliveryOption.value === 'home-delivery' ? 20 : 0;
+    const totalCost = quantity * price + deliveryCost;
+
+    // Prepare summary text
+    let summaryText = `<h3>Order Summary</h3>`;
+    summaryText += `<p><strong>Dish:</strong> ${foodSelect.value}</p>`;
+    summaryText += `<p><strong>Quantity:</strong> ${quantity}</p>`;
+    summaryText += `<p><strong>Delivery:</strong> ${deliveryOption.options[deliveryOption.selectedIndex].text}</p>`;
+    if (deliveryOption.value === 'home-delivery') {
+      summaryText += `<p><strong>Delivery Address:</strong> ${addressInput.value.trim()}</p>`;
+      summaryText += `<p><strong>Phone:</strong> ${phoneInput.value.trim()}</p>`;
+    }
+    summaryText += `<p><strong>Total Cost:</strong> P${totalCost}</p>`;
+    summaryText += `<p>Thank you for ordering with Trad Bites! Your order is being processed.</p>`;
+
+    orderSummary.innerHTML = summaryText;
+    orderSummary.style.display = 'block';
+
+    // Reset form except for displayed summary
+    this.reset();
+    deliveryDetails.style.display = 'none';
+  });
+
+  // Contact form submission handling - simulate sending message
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const nameInput = document.getElementById('name-input');
+    const emailInput = document.getElementById('email-input');
+    const messageTextarea = document.getElementById('message-textarea');
+    const feedback = document.getElementById('contact-feedback');
+
+    if (!nameInput.value.trim()) {
+      alert('Please enter your name.');
+      return;
+    }
+    if (!emailInput.value.trim()) {
+      alert('Please enter your email.');
+      return;
+    }
+    if (!messageTextarea.value.trim()) {
+      alert('Please enter your message.');
+      return;
+    }
+    // Basic email format check
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!emailPattern.test(emailInput.value)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // "Send" message (simulate)
+    feedback.textContent = `Thank you, ${nameInput.value.trim()}! Your message has been received. We will get back to you soon.`;
+    feedback.style.display = 'block';
+
+    // Reset form
+    this.reset();
+  });
+
+</script>
+
+</body>
+</html>
+</content>
+</create_file>
